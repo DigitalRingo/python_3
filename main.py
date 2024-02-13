@@ -1,0 +1,10 @@
+# автоматическое форматирование: ctrl alt L# дублировать строку: ctrl d
+a = int(input("Введите два числа: \n"))
+b = int(input())
+print("Вы ввели числa:", a, b)
+print("a - b = ", a - b)
+print("a * b = ", a * b)
+print("a ** b = ", a ** b)
+print("a / b = ", a / b)
+print("a // b = ", a // b)
+print("a % b = ", a % b)
