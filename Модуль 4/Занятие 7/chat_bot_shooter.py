@@ -7,7 +7,7 @@ from telebot import types
 from deep_translator import GoogleTranslator
 
 # В это место нужно вставить токен своего бота!
-API_TOKEN = "6484688443:AAFINyi5BJmVb6JA4yOZPcS5h4IjXh9a1AU"
+API_TOKEN = ""
 bot = telebot.TeleBot(API_TOKEN)
 # переводчик
 translator = GoogleTranslator(source="auto", target="ru")
