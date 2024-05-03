@@ -1,24 +1,25 @@
+import datetime
 import random
-
-import pyjokes
-import telebot
-import randfacts
-from telebot import types
-from deep_translator import GoogleTranslator
-import requests
 import shutil
 
+import pyjokes
+import randfacts
+import requests
+import telebot
+from deep_translator import GoogleTranslator
+from telebot import types
+
 # В это место нужно вставить токен своего бота!
-API_TOKEN = ""
+API_TOKEN = "6484688443:AAFINyi5BJmVb6JA4yOZPcS5h4IjXh9a1AU"
 bot = telebot.TeleBot(API_TOKEN)
 # переводчик
 translator = GoogleTranslator(source="auto", target="ru")
 
-#случайный факт о числе
+# случайный факт о числе
 numbers_url = "http://numbersapi.com/"
-#случайные картинки по категории природа (nature)
+# случайные картинки по категории природа (nature)
 pictures_url = "https://api.api-ninjas.com/v1/randomimage?category=nature"
-#ключ для API с картинками
+# ключ для API с картинками
 pictures_api_key = "vX/WAHjtRF2exfGFIqpxUA==nhKATTvaGXf25oIm"
 
 # список активных игроков
@@ -36,6 +37,18 @@ actions = {
     "лапка удачи": "Удар меховой лапкой с двойной силой по @",
     "лёд": "Удары фруктовыми кубиками льда по @"
 }
+
+
+# Добавляем логирование входящих сообщений
+@bot.message_handler(func=lambda message: True)
+def log_message(message):
+    print(
+        f"{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")} "
+        f"новое сообщение от: {message.from_user.last_name} {message.from_user.first_name} "
+        f"aka @{message.from_user.username} ,"
+        f" текст: {message.text}"
+    )
+    return telebot.ContinueHandling()
 
 
 # Активация взимодействия с ботом
