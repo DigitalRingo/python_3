@@ -43,7 +43,7 @@ actions = {
 @bot.message_handler(func=lambda message: True)
 def log_message(message):
     print(
-        f"{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")} "
+        f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} "
         f"новое сообщение от: {message.from_user.last_name} {message.from_user.first_name} "
         f"aka @{message.from_user.username} ,"
         f" текст: {message.text}"
