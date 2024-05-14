@@ -1,4 +1,3 @@
-from os import getenv
 from hugchat import hugchat
 from hugchat.login import Login
 from telebot import types
@@ -6,16 +5,18 @@ from telebot import types
 import telebot
 import datetime
 
-API_TOKEN = "7058112558:AAEkGixjtIp1QLTmoMUI-7tF9ZmymvVDVAs"
-bot = telebot.TeleBot(getenv('API_TOKEN') or API_TOKEN)
+# токен бота
+API_TOKEN = ""
+bot = telebot.TeleBot(API_TOKEN)
 
-HUGGING_FACE_EMAIL = "digitalringo@gmail.com"
-HUGGING_FACE_PASSWORD = "cQCzQS:r#Ea45+."
+# почта на https://huggingface.co/
+HUGGING_FACE_EMAIL = ""
+# пароль от аккаунта на https://huggingface.co/
+HUGGING_FACE_PASSWORD = ""
 
 cookie_path_dir = "./cookies/"
 sign = Login(HUGGING_FACE_EMAIL, HUGGING_FACE_PASSWORD)
-cookies = sign.login(cookie_dir_path=cookie_path_dir, save_cookies=True)
-chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
+
 
 # Добавляем логирование входящих сообщений
 @bot.message_handler(func=lambda message: True)
@@ -53,9 +54,12 @@ def handle_inline_question(query):
     except Exception as exception:
         print(exception)
 
+
 # метод для получения ответа от AI
 def get_ai_response(query):
     prompt = query.strip()
+    cookies = sign.login(cookie_dir_path=cookie_path_dir, save_cookies=True)
+    chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
     response = chatbot.chat(prompt)
     return str(response)
 
@@ -71,4 +75,4 @@ bot.set_my_commands(
     ]
 )
 print("Бот стартовал!")
-bot.polling(timeout=100, long_polling_timeout=100)
+bot.polling()
